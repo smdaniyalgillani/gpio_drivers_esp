@@ -12,3 +12,19 @@ void pinMode(uint64_t gpio_pin, gpio_mode_t gpio_mode, PinPullMode pull)
 
     gpio_config(&new_gpio);
 }
+
+void pinWrite(gpio_num_t gpio_num, uint32_t level)
+{
+    gpio_set_level(gpio_num, level);
+}
+
+int pinRead(gpio_num_t gpio_num, bool LOG_EN)
+{
+    int level = gpio_get_level(gpio_num);
+
+    if (LOG_EN) {
+        ESP_LOGI("GPIO", "Value at Pin %d is %d", gpio_num, level);
+    }
+
+    return level;
+}
